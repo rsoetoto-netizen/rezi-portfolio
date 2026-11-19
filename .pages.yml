@@ -57,8 +57,8 @@ content:
             label: Certificate Name
             type: string
           - name: certificate_url
-            label: Certificate File (optional)
-            type: file
+            label: Certificate URL (Duolingo, IELTS, etc.)
+            type: string
 
       - name: contact
         label: Contact
