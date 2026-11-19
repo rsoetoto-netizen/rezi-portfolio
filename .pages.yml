@@ -4,6 +4,65 @@ media:
     input: images
     output: /images
 content:
+  - name: bio
+    label: Website Content (Bio, Skills, Contact & Meme)
+    type: file
+    path: site.json
+    format: json
+    fields:
+      - name: bio
+        label: Bio
+        type: object
+        fields:
+          - name: photo
+            label: Profile photo
+            type: image
+          - name: headline
+            label: Headline
+            type: string
+          - name: subheadline
+            label: Subheadline
+            type: string
+          - name: description
+            label: Bio description
+            type: text
+      - name: skills
+        label: Skills
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Skill
+            type: string
+      - name: contact
+        label: Contact
+        type: object
+        fields:
+          - name: headline
+            label: Contact heading
+            type: string
+          - name: description
+            label: Contact description
+            type: text
+          - name: email
+            label: Email address
+            type: string
+          - name: whatsapp
+            label: WhatsApp number (e.g. 62812...)
+            type: string
+          - name: linkedin
+            label: LinkedIn profile URL
+            type: string
+      - name: meme
+        label: Meme next to contact
+        type: object
+        fields:
+          - name: image
+            label: Meme image
+            type: image
+          - name: caption
+            label: Meme caption (optional)
+            type: string
   - name: campaigns
     label: Campaigns
     type: file
@@ -32,14 +91,26 @@ content:
         label: Logo
         type: image
       - name: color
-        label: Card color (optional, e.g. #f3e51c)
+        label: 'Card color (optional, e.g. #f3e51c)'
         type: string
       - name: overview
         label: Overview
         type: text
+      - name: challenges
+        label: Challenges
+        type: text
+      - name: participants
+        label: Participants
+        type: text
       - name: role
         label: What I did
         type: text
+      - name: gallery
+        label: Visual campaign (multiple images)
+        type: image
+        options:
+          multiple:
+            max: 12
       - name: results
         label: Results
         type: text
@@ -59,5 +130,5 @@ content:
         type: string
         required: true
       - name: logo
-        label: Logo
+        label: Logo (use transparent PNG/WebP/SVG)
         type: image
