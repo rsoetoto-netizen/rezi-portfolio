@@ -1,0 +1,45 @@
+media:
+  - name: images
+    label: Images
+    input: images
+    output: /images
+content:
+  - name: campaigns
+    label: Campaigns
+    type: file
+    path: campaigns.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: Campaign name
+        type: string
+        required: true
+      - name: industry
+        label: Industry
+        type: string
+      - name: start
+        label: Start date
+        type: date
+        required: true
+      - name: ongoing
+        label: Still ongoing
+        type: boolean
+      - name: end
+        label: End date
+        type: date
+      - name: logo
+        label: Logo
+        type: image
+      - name: color
+        label: Card color (optional, e.g. #f3e51c)
+        type: string
+      - name: overview
+        label: Overview
+        type: text
+      - name: role
+        label: What I did
+        type: text
+      - name: results
+        label: Results
+        type: text
