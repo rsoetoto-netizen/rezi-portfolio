@@ -1,0 +1,36 @@
+{
+  "bio": {
+    "photo": "",
+    "headline": "Hi, I’m Rezi!",
+    "subheadline": "",
+    "description": "I’m a Project Manager from Jakarta, Indonesia. I have 5+ years of experience developing integrated social media campaigns, planning content strategy, and analyzing metrics for valuable insight."
+  },
+  "skills": [
+    {
+      "name": "Management of integrated social media campaigns"
+    },
+    {
+      "name": "Content strategy and editorial planning"
+    },
+    {
+      "name": "Analytics and reporting (GA, Meta Business Suite, Search Console)"
+    },
+    {
+      "name": "SEO and competitor research (Ahrefs)"
+    },
+    {
+      "name": "Stakeholder and client communication"
+    }
+  ],
+  "contact": {
+    "headline": "Let's Connect!",
+    "description": "Got a project, a big idea, or just a really good meme? My inbox is open. Let’s make something great together.",
+    "email": "",
+    "whatsapp": "",
+    "linkedin": ""
+  },
+  "meme": {
+    "image": "",
+    "caption": ""
+  }
+}
