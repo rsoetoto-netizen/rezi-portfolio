@@ -1,11 +1,13 @@
+
 media:
   - name: images
     label: Images
     input: images
     output: /images
+
 content:
   - name: bio
-    label: Website Content (Bio, Skills, Contact & Meme)
+    label: Website Content (Bio, Skills, Languages, Contact & Meme)
     type: file
     path: site.json
     format: json
@@ -26,6 +28,7 @@ content:
           - name: description
             label: Bio description
             type: text
+
       - name: skills
         label: Skills
         type: object
@@ -34,6 +37,29 @@ content:
           - name: name
             label: Skill
             type: string
+
+      - name: languages
+        label: Languages
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Language
+            type: string
+            required: true
+          - name: proficiency
+            label: Proficiency
+            type: string
+          - name: level
+            label: CEFR Level (optional)
+            type: string
+          - name: certificate_name
+            label: Certificate Name
+            type: string
+          - name: certificate_url
+            label: Certificate File (optional)
+            type: file
+
       - name: contact
         label: Contact
         type: object
@@ -53,6 +79,7 @@ content:
           - name: linkedin
             label: LinkedIn profile URL
             type: string
+
       - name: meme
         label: Meme next to contact
         type: object
@@ -63,6 +90,7 @@ content:
           - name: caption
             label: Meme caption (optional)
             type: string
+
   - name: campaigns
     label: Campaigns
     type: file
@@ -114,6 +142,7 @@ content:
       - name: results
         label: Results
         type: text
+
   - name: tools
     label: Tools
     type: file
