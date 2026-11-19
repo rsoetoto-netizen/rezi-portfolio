@@ -129,6 +129,15 @@ footer p{max-width:50ch;color:var(--muted)}
 .contact-meme figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
 @media(max-width:720px){.contact-layout{grid-template-columns:1fr}.avatar{width:132px;height:132px}}
 @media(max-width:440px){.campaign-gallery{grid-template-columns:1fr}}
+/* Languages beneath Skills & Tools */
+.languages-section{margin-top:36px;padding-top:26px;border-top:1px solid var(--line)}
+.languages-section h2{font-size:1.5rem;margin-bottom:14px}
+.language-item{padding:12px 0;border-bottom:1px solid var(--line)}
+.language-info{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.language-name{font-weight:500}
+.language-level{color:var(--muted);font-size:.88rem;text-align:right}
+.language-certificate{display:inline-block;margin-top:5px;color:var(--accent);font-size:.8rem;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:600px){.language-info{flex-direction:column;gap:2px}.language-level{text-align:left}}
 </style>
 </head>
 <body>
@@ -164,6 +173,10 @@ footer p{max-width:50ch;color:var(--muted)}
         <h2>Tools</h2>
         <div id="tools"><p class="status">Loading tools…</p></div>
       </div>
+    </div>
+    <div class="languages-section" id="languages-section" hidden>
+      <h2>Languages</h2>
+      <div id="languages-list"></div>
     </div>
   </section>
 
@@ -256,6 +269,33 @@ footer p{max-width:50ch;color:var(--muted)}
     if(Array.isArray(site.skills)){
       var skills=document.getElementById('skills-list');skills.textContent='';
       site.skills.forEach(function(item){var name=typeof item==='string'?item:(item&&item.name);if(name)skills.append(el('li','',name));});
+    }
+    // CMS-managed languages (optional certificates)
+    if(Array.isArray(site.languages)){
+      var languageList=document.getElementById('languages-list');
+      var languageSection=document.getElementById('languages-section');
+      languageList.textContent='';
+      site.languages.forEach(function(lang){
+        if(!lang||typeof lang!=='object'||!lang.name)return;
+        var item=el('div','language-item');
+        var info=el('div','language-info');
+        var name=el('span','language-name',lang.name);
+        var levelText=[lang.proficiency,lang.level?lang.level+' CEFR':''].filter(Boolean).join(' · ');
+        info.append(name,el('span','language-level',levelText));
+        item.append(info);
+        if(lang.certificate_url){
+          var raw=String(lang.certificate_url).trim();
+          var isExternal=/^https:\/\//i.test(raw);
+          var href=isExternal?raw:safeImagePath(raw);
+          if(href){
+            var cert=el('a','language-certificate',lang.certificate_name||'View Certificate');
+            cert.href=href;cert.target='_blank';cert.rel='noopener noreferrer';
+            item.append(cert);
+          }
+        }
+        languageList.append(item);
+      });
+      languageSection.hidden=!languageList.children.length;
     }
     var contact=site.contact||{};
     if(contact.headline)document.getElementById('contact-headline').textContent=contact.headline;
