@@ -133,6 +133,11 @@ footer p{max-width:50ch;color:var(--muted)}
 .languages-section{margin-top:36px;padding-top:26px;border-top:1px solid var(--line)}
 .languages-section h2{font-size:1.5rem;margin-bottom:14px}
 .language-item{padding:12px 0;border-bottom:1px solid var(--line)}
+  
+/* Remove the last language item's bottom border */
+.language-item:last-child {
+  border-bottom: none;
+}
 .language-info{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
 .language-name{font-weight:500}
 .language-level{color:var(--muted);font-size:.88rem;text-align:right}
