@@ -20,6 +20,22 @@
       "name": "Stakeholder and client communication"
     }
   ],
+"languages": [
+  {
+    "name": "Bahasa Indonesia",
+    "proficiency": "Native",
+    "level": "",
+    "certificate_name": "",
+    "certificate_url": ""
+  },
+  {
+    "name": "English",
+    "proficiency": "Conversational",
+    "level": "B2",
+    "certificate_name": "",
+    "certificate_url": ""
+  }
+],
   "contact": {
     "headline": "Let's Connect!",
     "description": "Got a project, a big idea, or just a really good meme? My inbox is open. Let’s make something great together.",
