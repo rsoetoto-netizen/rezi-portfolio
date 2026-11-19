@@ -73,6 +73,33 @@ body:has(dialog[open]){overflow:hidden}
 .chips li img{display:block;max-width:120px;max-height:100%;width:auto}
 footer{padding:52px 0 64px;border-top:1px solid var(--line)}
 footer p{max-width:50ch;color:var(--muted)}
+
+
+[hidden]{display:none!important}
+/* CMS-managed profile */
+.avatar{width:150px;height:150px;overflow:hidden}
+.avatar img{display:block;width:100%;height:100%;object-fit:cover}
+#bio-subtitle{margin:4px 0 0;font-weight:500}
+/* Transparent-looking tool logo slots; images must themselves be transparent */
+.chips li.has-logo{background:transparent;border:0;padding:4px 10px;min-width:72px;height:54px}
+.chips li.has-logo img{max-width:112px;max-height:46px;height:auto;width:auto;object-fit:contain}
+/* Campaign gallery */
+.campaign-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.campaign-gallery a{display:block;overflow:hidden;border-radius:8px;border:1px solid var(--line);background:var(--pill)}
+.campaign-gallery img{display:block;width:100%;height:190px;object-fit:contain}
+/* Contact and meme */
+.contact-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;align-items:center}
+.contact-links{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin:22px 0 0}
+.contact-item{display:flex;flex-direction:column;gap:2px;min-width:0}
+.contact-label{font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.contact-links a{display:inline-block;color:var(--accent);font-weight:500;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.contact-links a:hover{color:var(--ink)}
+.contact-meme{margin:0;min-width:0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.contact-meme[hidden]{display:none}
+.contact-meme img{display:block;width:100%;max-width:380px;max-height:320px;object-fit:contain;border-radius:10px}
+.contact-meme figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+@media(max-width:720px){.contact-layout{grid-template-columns:1fr}.avatar{width:132px;height:132px}}
+@media(max-width:440px){.campaign-gallery{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -83,10 +110,11 @@ footer p{max-width:50ch;color:var(--muted)}
   </nav>
 
   <div class="intro" id="about">
-    <div class="avatar" aria-hidden="true">R</div>
+    <div class="avatar" id="bio-avatar" aria-label="Profile photo">R</div>
     <div>
-      <h1>Hi, I’m Rezi!</h1>
-      <p class="lead">I’m a Project Manager from Jakarta, Indonesia. I have 5+ years of experience developing integrated social media campaigns, planning content strategy, and analyzing metrics for valuable insight.</p>
+      <h1 id="bio-headline">Hi, I’m Rezi!</h1>
+      <p id="bio-subtitle" hidden></p>
+      <p class="lead" id="bio-description">I’m a Project Manager from Jakarta, Indonesia. I have 5+ years of experience developing integrated social media campaigns, planning content strategy, and analyzing metrics for valuable insight.</p>
       <a class="btn primary" href="#campaigns">See my campaigns</a><a class="btn" href="#contact">Get in touch</a>
     </div>
   </div>
@@ -95,7 +123,7 @@ footer p{max-width:50ch;color:var(--muted)}
     <div class="two">
       <div>
         <h2>Skills</h2>
-        <ul class="skills">
+        <ul class="skills" id="skills-list">
           <li>Management of integrated social media campaigns</li>
           <li>Content strategy and editorial planning</li>
           <li>Analytics and reporting (GA, Meta Business Suite, Search Console)</li>
@@ -117,9 +145,17 @@ footer p{max-width:50ch;color:var(--muted)}
   </section>
 
   <footer id="contact">
-    <h2>Reach out to me!</h2>
-    <p>Planning a campaign or looking for a project manager? I’d be glad to hear from you.</p>
-    <a class="btn primary" href="mailto:your@email.com">Email me</a>
+    <div class="contact-layout">
+      <div>
+        <h2 id="contact-headline">Reach out to me!</h2>
+        <p id="contact-description">Got a project, a big idea, or just a really good meme? My inbox is open. Let’s make something great together.</p>
+        <div class="contact-links" id="contact-links"></div>
+      </div>
+      <figure class="contact-meme" id="contact-meme" hidden>
+        <img id="contact-meme-image" alt="Meme">
+        <figcaption id="contact-meme-caption"></figcaption>
+      </figure>
+    </div>
   </footer>
 </div>
 
@@ -153,12 +189,72 @@ footer p{max-width:50ch;color:var(--muted)}
     tag.textContent=c.industry||'';tag.hidden=!c.industry;
     when.textContent=period(c);when.classList.toggle('live',!!c.ongoing);
     body.textContent='';
-    [['Overview',c.overview],['What I did',c.role],['Results',c.results]].forEach(function(s){
+    [['Overview',c.overview],['Challenges',c.challenges],['Participants',c.participants],['What I Did',c.role]].forEach(function(s){
       if(s[1]){body.append(el('h3','',s[0]),el('p','txt',s[1]));}
     });
+    var gallery=Array.isArray(c.gallery)?c.gallery:(c.gallery?[c.gallery]:[]);
+    gallery=gallery.filter(function(src){return typeof src==='string'&&src.trim();});
+    if(gallery.length){
+      body.append(el('h3','','Visual Campaign'));
+      var photos=el('div','campaign-gallery');
+      gallery.forEach(function(src,idx){
+        var href=String(src).replace(/^\/+/,'');
+        var a=el('a');a.href=href;a.target='_blank';a.rel='noopener noreferrer';
+        var img=document.createElement('img');img.src=href;img.alt=c.name+' visual campaign '+(idx+1);img.loading='lazy';
+        a.append(img);photos.append(a);
+      });
+      body.append(photos);
+    }
+    if(c.results){body.append(el('h3','','Results'),el('p','txt',c.results));}
     if(!body.children.length){var q=el('p','',"Details for this campaign are coming soon.");q.style.marginTop='22px';body.append(q);}
     dlg.showModal();
   }
+
+  // CMS-managed sections. Original HTML remains as fallback if site.json is unavailable.
+  function safeImagePath(path){
+    if(typeof path!=='string'||!path.trim())return '';
+    var s=path.trim().replace(/^\/+/,'');
+    if(s.indexOf('..')!==-1||/^(?:javascript|data):/i.test(s))return '';
+    return s;
+  }
+  fetch('site.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(site){
+    if(!site||typeof site!=='object')return;
+    var bio=site.bio||{};
+    if(bio.headline)document.getElementById('bio-headline').textContent=bio.headline;
+    if(bio.subheadline){var sh=document.getElementById('bio-subtitle');sh.textContent=bio.subheadline;sh.hidden=false;}
+    if(bio.description)document.getElementById('bio-description').textContent=bio.description;
+    if(bio.photo){var path=safeImagePath(bio.photo);if(path){var avatar=document.getElementById('bio-avatar');avatar.textContent='';var portrait=document.createElement('img');portrait.src=path;portrait.alt='Rezi profile photo';avatar.append(portrait);}}
+    if(Array.isArray(site.skills)){
+      var skills=document.getElementById('skills-list');skills.textContent='';
+      site.skills.forEach(function(item){var name=typeof item==='string'?item:(item&&item.name);if(name)skills.append(el('li','',name));});
+    }
+    var contact=site.contact||{};
+    if(contact.headline)document.getElementById('contact-headline').textContent=contact.headline;
+    if(contact.description)document.getElementById('contact-description').textContent=contact.description;
+    var links=document.getElementById('contact-links');
+    function addContact(label,display,url){
+      var item=el('div','contact-item'),heading=el('span','contact-label',label),a=el('a','',display);
+      a.href=url;
+      if(url.indexOf('https://')===0){a.target='_blank';a.rel='noopener noreferrer';}
+      item.append(heading,a);links.append(item);
+    }
+    if(contact.email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email)){
+      addContact('Email',contact.email,'mailto:'+contact.email);
+    }
+    if(contact.whatsapp){
+      var digits=String(contact.whatsapp).replace(/\D/g,'');
+      if(digits){
+        if(digits.indexOf('0')===0)digits='62'+digits.slice(1);
+        addContact('WhatsApp','+'+digits+' · Chat on WhatsApp','https://wa.me/'+digits);
+      }
+    }
+    if(contact.linkedin&&/^https:\/\/(?:[a-z]{2,3}\.)?linkedin\.com\//i.test(contact.linkedin)){
+      addContact('LinkedIn','View my LinkedIn profile',contact.linkedin);
+    }
+    var meme=site.meme||{};
+    if(meme.image){var imgpath=safeImagePath(meme.image);if(imgpath){document.getElementById('contact-meme-image').src=imgpath;document.getElementById('contact-meme-caption').textContent=meme.caption||'';document.getElementById('contact-meme').hidden=false;}}
+  }).catch(function(){/* Keep existing on-page content if config is unavailable */});
+
   fetch('campaigns.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(list){
     if(!Array.isArray(list))throw 0;
     grid.textContent='';
