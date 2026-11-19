@@ -1,9 +1,31 @@
 [
-  { "group": "Digital marketing", "name": "Ahrefs", "logo": "" },
-  { "group": "Digital marketing", "name": "Google Search Console", "logo": "" },
-  { "group": "Digital marketing", "name": "Meta Ads Library", "logo": "" },
-  { "group": "Digital marketing", "name": "Google Workspace", "logo": "" },
-  { "group": "Digital marketing", "name": "Google Analytics", "logo": "" },
-  { "group": "Project management", "name": "monday.com", "logo": "" },
-  { "group": "Project management", "name": "Claude", "logo": "" }
+  {
+    "group": "Digital marketing",
+    "name": "Ahrefs",
+    "logo": "/images/ahrefs_6x4.png"
+  },
+  {
+    "group": "Digital marketing",
+    "name": "Google Search Console"
+  },
+  {
+    "group": "Digital marketing",
+    "name": "Meta Ads Library"
+  },
+  {
+    "group": "Digital marketing",
+    "name": "Google Workspace"
+  },
+  {
+    "group": "Digital marketing",
+    "name": "Google Analytics"
+  },
+  {
+    "group": "Project management",
+    "name": "monday.com"
+  },
+  {
+    "group": "Project management",
+    "name": "Claude"
+  }
 ]
