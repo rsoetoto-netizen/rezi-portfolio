@@ -65,6 +65,8 @@ body:has(dialog[open]){overflow:hidden}
 .detail p{margin:0;color:var(--muted)}
 .detail .when{margin-top:12px}
 .detail .txt{white-space:pre-line}
+.chips li.has-logo{display:flex;align-items:center;justify-content:center;height:52px;padding:8px 14px;background:#fff;border:1px solid var(--line)}
+.chips li img{display:block;max-width:120px;max-height:100%;width:auto}
 footer{padding:52px 0 64px;border-top:1px solid var(--line)}
 footer p{max-width:50ch;color:var(--muted)}
 </style>
@@ -99,10 +101,7 @@ footer p{max-width:50ch;color:var(--muted)}
       </div>
       <div class="tools">
         <h2>Tools</h2>
-        <h3>Digital marketing</h3>
-        <ul class="chips"><li>Ahrefs</li><li>Google Search Console</li><li>Meta Ads Library</li><li>Google Workspace</li><li>Google Analytics</li></ul>
-        <h3>Project management</h3>
-        <ul class="chips"><li>monday.com</li><li>Claude</li></ul>
+        <div id="tools"><p class="status">Loading tools…</p></div>
       </div>
     </div>
   </section>
@@ -174,6 +173,23 @@ footer p{max-width:50ch;color:var(--muted)}
       grid.append(card);
     });
   }).catch(function(){grid.textContent='Campaigns could not be loaded right now.';});
+  var toolsBox=document.getElementById('tools');
+  fetch('tools.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(list){
+    if(!Array.isArray(list))throw 0;
+    var groups={},order=[];
+    list.forEach(function(t){var g=t.group||'Tools';if(!groups[g]){groups[g]=[];order.push(g);}groups[g].push(t);});
+    toolsBox.textContent='';
+    order.forEach(function(g){
+      var ul=el('ul','chips');
+      groups[g].forEach(function(t){
+        var li=el('li',t.logo?'has-logo':'');
+        if(t.logo){var i=document.createElement('img');i.src=String(t.logo).replace(/^\/+/,'');i.alt=t.name;li.title=t.name;li.append(i);}
+        else li.textContent=t.name;
+        ul.append(li);
+      });
+      toolsBox.append(el('h3','',g),ul);
+    });
+  }).catch(function(){toolsBox.textContent='Tools could not be loaded right now.';});
   dlg.querySelector('.close').addEventListener('click',function(){dlg.close();});
   dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
 })();
