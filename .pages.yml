@@ -43,3 +43,21 @@ content:
       - name: results
         label: Results
         type: text
+  - name: tools
+    label: Tools
+    type: file
+    path: tools.json
+    format: json
+    list: true
+    fields:
+      - name: group
+        label: Group (e.g. Digital marketing)
+        type: string
+        required: true
+      - name: name
+        label: Tool name
+        type: string
+        required: true
+      - name: logo
+        label: Logo
+        type: image
