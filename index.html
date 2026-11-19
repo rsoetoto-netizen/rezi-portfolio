@@ -45,8 +45,12 @@ ul{margin:0;padding:0}
 .card{overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer}
 .card:hover{border-color:var(--accent)}
 .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.logo{display:grid;place-items:center;height:150px;padding:0 16px;border-bottom:1px solid var(--line);background:var(--lb,#fff);color:var(--lf,#1f2328);font:600 1.7rem/1.2 Newsreader,Georgia,serif;text-align:center}
-.logo img{max-width:70%;max-height:70%;object-fit:contain}
+.logo{display:grid;place-items:center;height:150px;padding:0 16px;border-bottom:1px solid var(--line);background:var(--lb,#fff);color:var(--lf,#1f2328);font:600 1.7rem/1.2 Newsreader,Georgia,serif;text-align:center;overflow:hidden;min-width:0}
+/* Campaign logo: controlled dimensions prevent oversized images */
+.card .logo img{display:block;width:min(190px,80%);height:118px;max-width:100%;object-fit:contain;object-position:center}
+/* Popup logo is independently sized and contained within its banner */
+.dlg-head .logo img{display:block;width:min(160px,65%);height:145px;max-width:100%;object-fit:contain;object-position:center}
+@media (max-width:600px){.dlg-head .logo img{width:min(140px,65%);height:120px}}
 .meta{padding:14px 16px 16px}
 .meta h3{margin-bottom:8px;font-size:1.2rem}
 .pill{display:inline-block;padding:1px 9px;border-radius:4px;background:var(--pill);font-size:.82rem}
