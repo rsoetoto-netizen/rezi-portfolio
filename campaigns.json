@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Larder Indonesia",
+    "industry": "Food & Beverage",
+    "start": "2025-06-01",
+    "end": "2026-07-19",
+    "ongoing": false,
+    "logo": "",
+    "color": "#1b2a4a",
+    "overview": "",
+    "role": "",
+    "results": ""
+  },
+  {
+    "name": "Hevit-C",
+    "industry": "Health",
+    "start": "2025-08-01",
+    "end": "2026-09-30",
+    "ongoing": false,
+    "logo": "",
+    "color": "#f3e51c",
+    "overview": "",
+    "role": "",
+    "results": ""
+  },
+  {
+    "name": "Paylabs Indonesia",
+    "industry": "Technology",
+    "start": "2025-10-23",
+    "end": "2026-04-22",
+    "ongoing": false,
+    "logo": "",
+    "color": "#1f2d4d",
+    "overview": "",
+    "role": "",
+    "results": ""
+  },
+  {
+    "name": "Helene Omotesando",
+    "industry": "Health",
+    "start": "2024-10-08",
+    "end": "",
+    "ongoing": true,
+    "logo": "",
+    "color": "#1b2150",
+    "overview": "",
+    "role": "",
+    "results": ""
+  },
+  {
+    "name": "Ranaya",
+    "industry": "Health",
+    "start": "2026-06-02",
+    "end": "",
+    "ongoing": true,
+    "logo": "",
+    "color": "#111111",
+    "overview": "",
+    "role": "",
+    "results": ""
+  },
+  {
+    "name": "MSA Safety",
+    "industry": "B2B",
+    "start": "2026-02-12",
+    "end": "",
+    "ongoing": true,
+    "logo": "",
+    "color": "#1a9b4a",
+    "overview": "",
+    "role": "",
+    "results": ""
+  }
+]
