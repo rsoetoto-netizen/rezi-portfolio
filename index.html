@@ -69,8 +69,37 @@ body:has(dialog[open]){overflow:hidden}
 .detail p{margin:0;color:var(--muted)}
 .detail .when{margin-top:12px}
 .detail .txt{white-space:pre-line}
-.chips li.has-logo{display:flex;align-items:center;justify-content:center;height:52px;padding:8px 14px;background:#fff;border:1px solid var(--line)}
-.chips li img{display:block;max-width:120px;max-height:100%;width:auto}
+/* Tools dengan logo */
+.chips li.has-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 140px;
+  min-height: 115px;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+/* Ukuran logo */
+.chips li.has-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 140px;
+  max-height: 65px;
+  object-fit: contain;
+}
+/* Nama tool di bawah logo */
+.chips li.has-logo .tool-caption {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--muted);
+  text-align: center;
+}
 footer{padding:52px 0 64px;border-top:1px solid var(--line)}
 footer p{max-width:50ch;color:var(--muted)}
 
