@@ -310,12 +310,24 @@ footer p{max-width:50ch;color:var(--muted)}
     toolsBox.textContent='';
     order.forEach(function(g){
       var ul=el('ul','chips');
-      groups[g].forEach(function(t){
-        var li=el('li',t.logo?'has-logo':'');
-        if(t.logo){var i=document.createElement('img');i.src=String(t.logo).replace(/^\/+/,'');i.alt=t.name;li.title=t.name;li.append(i);}
-        else li.textContent=t.name;
-        ul.append(li);
-      });
+groups[g].forEach(function(t){
+  var li = el('li', t.logo ? 'has-logo' : '');
+
+  if(t.logo){
+    var img = document.createElement('img');
+    img.src = String(t.logo).replace(/^\/+/, '');
+    img.alt = t.name;
+
+    // Nama tool di bawah logo
+    var caption = el('span', 'tool-caption', t.name);
+
+    li.append(img, caption);
+  } else {
+    li.textContent = t.name;
+  }
+
+  ul.append(li);
+});
       toolsBox.append(el('h3','',g),ul);
     });
   }).catch(function(){toolsBox.textContent='Tools could not be loaded right now.';});
