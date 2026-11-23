@@ -1,3 +1,4 @@
+
 media:
   - name: images
     label: Images
@@ -33,17 +34,14 @@ content:
         type: object
         list: true
         fields:
-          - name: name
-            label: Skill
-            type: string
           - name: group
-            label: Group
-            type: select
-            options:
-              values:
-                - "Campaign & project management"
-                - "Content & copywriting"
-                - "Analytics & insight"
+            label: Skill Category
+            type: string
+            required: true
+          - name: items
+            label: Skills in this category
+            type: string
+            list: true
 
       - name: languages
         label: Languages
