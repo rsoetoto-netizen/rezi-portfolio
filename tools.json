@@ -2,31 +2,46 @@
   {
     "group": "Digital marketing",
     "name": "Ahrefs",
-    "logo": "/images/ahrefs_6x4.png"
+    "logo": "/images/Ahrefs.png"
+  },
+  {
+    "group": "Digital marketing",
+    "name": "Meta Ads Library",
+    "logo": "/images/Meta-Ad-Library.png"
+  },
+  {
+    "group": "Digital Marketing",
+    "name": "Meta Ads Manager",
+    "logo": "/images/Meta-Ads.png"
+  },
+  {
+    "group": "Digital marketing",
+    "name": "Google Workspace",
+    "logo": "/images/Google-Workspace.png"
+  },
+  {
+    "group": "Digital marketing",
+    "name": "Google Analytics",
+    "logo": "/images/Google-Analytics.png"
   },
   {
     "group": "Digital marketing",
     "name": "Google Search Console",
-    "logo": "/images/google_search_console_6x4.png"
-  },
-  {
-    "group": "Digital marketing",
-    "name": "Meta Ads Library"
-  },
-  {
-    "group": "Digital marketing",
-    "name": "Google Workspace"
-  },
-  {
-    "group": "Digital marketing",
-    "name": "Google Analytics"
+    "logo": "/images/Google-Search-Console.png"
   },
   {
     "group": "Project management",
-    "name": "monday.com"
+    "name": "monday.com",
+    "logo": "/images/Monday-Com.png"
   },
   {
     "group": "Project management",
-    "name": "Claude"
+    "name": "Claude",
+    "logo": "/images/Claude.png"
+  },
+  {
+    "group": "Project management",
+    "name": "ChatGPT",
+    "logo": "/images/ChatGPT.png"
   }
 ]
