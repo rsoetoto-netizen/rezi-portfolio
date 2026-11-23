@@ -23,7 +23,8 @@
     "start": "2025-08-01",
     "ongoing": false,
     "end": "2026-09-30",
-    "logo": "/images/HEVIT-C LOGO.png"
+    "logo": "/images/HEVIT-C LOGO.png",
+    "overview": "Hevit-C is a vitamin C supplement brand from Hexpharm Jaya. Available in 500 mg and 1,000 mg tablets, it helps consumers meet their daily vitamin C needs."
   },
   {
     "name": "Paylabs Indonesia",
@@ -31,7 +32,8 @@
     "start": "2025-10-23",
     "ongoing": false,
     "end": "2026-04-22",
-    "logo": "/images/Logo-Full-Transparent-scaled-1.png"
+    "logo": "/images/Logo-Full-Transparent-scaled-1.png",
+    "overview": "Paylabs is an Indonesian payment gateway that helps merchants and enterprises accept digital payments. Its platform supports multiple payment methods, including QRIS and bank virtual accounts, so businesses can offer customers more ways to pay."
   },
   {
     "name": "Helene Omotesando",
@@ -39,7 +41,8 @@
     "start": "2024-10-08",
     "ongoing": true,
     "end": "2026-11-19",
-    "logo": "/images/HELENE_LOGO_26_XL-1.png"
+    "logo": "/images/HELENE_LOGO_26_XL-1.png",
+    "overview": "Helene Stem Cell is a Tokyo-based clinic specializing in regenerative medicine and stem cell therapy. The clinic welcomes international patients and provides Indonesian-language support for those seeking care in Japan."
   },
   {
     "name": "Ranaya",
@@ -47,7 +50,8 @@
     "start": "2026-06-02",
     "ongoing": true,
     "end": "2026-11-19",
-    "logo": "/images/Sharp black RNY corporate logo lockup.png"
+    "logo": "/images/Sharp black RNY corporate logo lockup.png",
+    "overview": "Ranaya Training provides practical emergency response and safety training for professionals working in high-risk environments. Its programs help journalists, humanitarian workers, and field teams assess risks, make decisions under pressure, and respond to emergencies"
   },
   {
     "name": "MSA Safety",
@@ -55,6 +59,7 @@
     "start": "2026-02-12",
     "ongoing": true,
     "end": "2026-11-19",
-    "logo": "/images/MSA_The-Safety-Company_Logo_RGB.png"
+    "logo": "/images/MSA_The-Safety-Company_Logo_RGB.png",
+    "overview": "MSA Safety develops equipment that helps protect workers in hazardous environments. Its portfolio includes gas and flame detection systems, fall protection equipment, and respiratory protection for industries such as oil and gas, construction, and utilities"
   }
 ]
