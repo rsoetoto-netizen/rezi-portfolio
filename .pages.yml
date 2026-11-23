@@ -1,4 +1,3 @@
-
 media:
   - name: images
     label: Images
@@ -128,16 +127,28 @@ content:
         type: string
       - name: overview
         label: Overview
-        type: text
+        type: rich-text
+        options:
+          format: html
+          media: false
       - name: challenges
         label: Challenges
-        type: text
+        type: rich-text
+        options:
+          format: html
+          media: false
       - name: participants
         label: Participants
-        type: text
+        type: rich-text
+        options:
+          format: html
+          media: false
       - name: role
         label: What I did
-        type: text
+        type: rich-text
+        options:
+          format: html
+          media: false
       - name: gallery
         label: Visual campaign (multiple images)
         type: image
@@ -146,7 +157,10 @@ content:
             max: 12
       - name: results
         label: Results
-        type: text
+        type: rich-text
+        options:
+          format: html
+          media: false
 
   - name: tools
     label: Tools
