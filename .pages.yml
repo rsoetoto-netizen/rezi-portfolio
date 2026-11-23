@@ -1,4 +1,3 @@
-
 media:
   - name: images
     label: Images
@@ -29,7 +28,7 @@ content:
             label: Bio description
             type: text
 
-        - name: skills
+      - name: skills
         label: Skills
         type: object
         list: true
