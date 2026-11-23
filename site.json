@@ -1,3 +1,4 @@
+
 {
   "bio": {
     "headline": "Hi, I’m Rezi!",
@@ -5,19 +6,26 @@
   },
   "skills": [
     {
-      "name": "Management of integrated social media campaigns"
+      "group": "Campaign & Project Management",
+      "items": [
+        "Integrated social media campaigns, from brief to launch to wrap-up",
+        "Editorial calendars, timelines, and workflow planning",
+        "Stakeholder and client communication"
+      ]
     },
     {
-      "name": "Content strategy and editorial planning"
+      "group": "Content & Copywriting",
+      "items": [
+        "Content strategy and editorial planning",
+        "Social media copywriting"
+      ]
     },
     {
-      "name": "Analytics and reporting (GA, Meta Business Suite, Search Console)"
-    },
-    {
-      "name": "SEO and competitor research (Ahrefs)"
-    },
-    {
-      "name": "Stakeholder and client communication"
+      "group": "Analytics & Insight",
+      "items": [
+        "Reporting and analysis with GA, Meta Business Suite, and Search Console",
+        "SEO and competitor research with Ahrefs"
+      ]
     }
   ],
   "languages": [
