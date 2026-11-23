@@ -62,7 +62,28 @@ h2+.skill-group{margin-top:0}
 .pill{display:inline-block;padding:1px 9px;border-radius:4px;background:var(--pill);font-size:.82rem}
 .meta p{margin:8px 0 0;color:var(--muted);font-size:.9rem}
 .live::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#2f9e5b}
-dialog{width:min(640px,calc(100% - 32px));max-height:calc(100% - 48px);padding:0;overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+/* Wider campaign popup with comfortable margins on desktop and mobile */
+dialog{
+  width:min(800px,calc(100% - 64px));
+  max-width:800px;
+  max-height:calc(100dvh - 64px);
+  padding:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--ink);
+  box-sizing:border-box;
+}
+@media (max-width:600px){
+  dialog{
+    width:calc(100% - 24px);
+    max-width:none;
+    max-height:calc(100dvh - 32px);
+    border-radius:10px;
+  }
+}
 dialog::backdrop{background:rgba(0,0,0,.55)}
 body:has(dialog[open]){overflow:hidden}
 .dlg-head{position:relative}
