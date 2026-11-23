@@ -38,6 +38,8 @@ ul{margin:0;padding:0}
 .skills li{margin:8px 0}
 .skill-group{margin:22px 0 4px;font-size:1.1rem}
 h2+.skill-group{margin-top:0}
+.skills-groups>.skill-group:first-child{margin-top:0}
+.skills-groups .skills{margin-bottom:12px}
 .tools h3{margin-bottom:10px;font-size:1.1rem}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;list-style:none}
 .chips li{padding:4px 12px;border-radius:6px;background:var(--pill);font-size:.92rem}
@@ -307,24 +309,24 @@ footer p{max-width:50ch;color:var(--muted)}
     if(bio.subheadline){var sh=document.getElementById('bio-subtitle');sh.textContent=bio.subheadline;sh.hidden=false;}
     if(bio.description)document.getElementById('bio-description').textContent=bio.description;
     if(bio.photo){var path=safeImagePath(bio.photo);if(path){var avatar=document.getElementById('bio-avatar');avatar.textContent='';var portrait=document.createElement('img');portrait.src=path;portrait.alt='Rezi profile photo';avatar.append(portrait);}}
+    // Grouped Skills from Pages CMS: [{group: "...", items: ["...", "..."]}]
     if(Array.isArray(site.skills)){
-      var skills=document.getElementById('skills-list'),box=skills.parentNode,map={},order=[];
-      site.skills.forEach(function(item){
-        var name=typeof item==='string'?item:(item&&item.name);
-        if(!name)return;
-        var g=(item&&item.group)||'';
-        if(!map[g]){map[g]=[];order.push(g);}
-        map[g].push(name);
+      var originalSkills=document.getElementById('skills-list');
+      var groupedSkills=el('div','skills-groups');
+      groupedSkills.id='skills-list';
+      site.skills.forEach(function(group){
+        if(!group||typeof group!=='object')return;
+        var names=Array.isArray(group.items)?group.items:[];
+        // Backward compatibility with the previous one-skill-per-item CMS format.
+        if(!names.length&&group.name)names=[group.name];
+        names=names.filter(function(n){return typeof n==='string'&&n.trim();});
+        if(!names.length)return;
+        if(group.group)groupedSkills.append(el('h3','skill-group',group.group));
+        var skillList=el('ul','skills');
+        names.forEach(function(n){skillList.append(el('li','',n));});
+        groupedSkills.append(skillList);
       });
-      if(order.length){
-        skills.remove();
-        order.forEach(function(g){
-          if(g)box.append(el('h3','skill-group',g));
-          var ul=el('ul','skills');
-          map[g].forEach(function(n){ul.append(el('li','',n));});
-          box.append(ul);
-        });
-      }
+      if(groupedSkills.children.length)originalSkills.replaceWith(groupedSkills);
     }
     // CMS-managed languages (optional certificates)
     if(Array.isArray(site.languages)){
