@@ -95,7 +95,19 @@ body:has(dialog[open]){overflow:hidden}
 .detail h3{margin:22px 0 6px;font-size:1.1rem}
 .detail p{margin:0;color:var(--muted)}
 .detail .when{margin-top:12px}
-.detail .txt{white-space:pre-line}
+/* Rich text from Pages CMS (plain text is supported too) */
+.detail .rich-content{margin-top:6px;overflow-wrap:anywhere;line-height:1.7;color:var(--muted)}
+.detail .rich-content p{margin:0 0 10px;color:inherit}
+.detail .rich-content p:last-child{margin-bottom:0}
+.detail .rich-content ul,.detail .rich-content ol{margin:6px 0 12px;padding-left:24px}
+.detail .rich-content li{margin:4px 0}
+.detail .rich-content strong,.detail .rich-content b{font-weight:700;color:var(--ink)}
+.detail .rich-content em,.detail .rich-content i{font-style:italic}
+.detail .rich-content u{text-decoration:underline}
+.detail .rich-content a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.detail .rich-content h4{font:600 1.05rem/1.4 Inter,system-ui,sans-serif;margin:14px 0 6px;color:var(--ink)}
+.detail .rich-content blockquote{border-left:3px solid var(--line);padding-left:12px;margin:10px 0}
+.detail .rich-content.plain-text{white-space:pre-line}
 /* Uniform transparent tool tiles; matching logo and caption baselines */
 .tools .chips li.has-logo{
   display:flex;
@@ -317,6 +329,45 @@ footer p{max-width:50ch;color:var(--muted)}
     if(c.logo){var i=document.createElement('img');i.src=String(c.logo).replace(/^\/+/,'');i.alt=c.name+' logo';box.append(i);}
     else box.textContent=c.name;
   }
+  // Build rich text safely: only approved formatting tags are copied from CMS HTML.
+  function renderCampaignText(value){
+    var result=el('div','rich-content');
+    var content=String(value==null?'':value);
+    // Existing JSON entries were plain text, so retain their line breaks.
+    if(!/<\/?(?:p|div|br|strong|b|em|i|u|s|del|ul|ol|li|a|h[1-6]|blockquote|span)\b/i.test(content)){
+      result.classList.add('plain-text');
+      result.textContent=content;
+      return result;
+    }
+    var doc=new DOMParser().parseFromString(content,'text/html');
+    var allowed={p:'p',div:'p',br:'br',strong:'strong',b:'strong',em:'em',i:'em',u:'u',s:'s',del:'s',ul:'ul',ol:'ol',li:'li',a:'a',h1:'h4',h2:'h4',h3:'h4',h4:'h4',h5:'h4',h6:'h4',blockquote:'blockquote',span:'span'};
+    function copySafe(from,to){
+      Array.from(from.childNodes).forEach(function(node){
+        if(node.nodeType===3){to.append(document.createTextNode(node.nodeValue));return;}
+        if(node.nodeType!==1)return;
+        var type=node.tagName.toLowerCase();
+        if(!Object.prototype.hasOwnProperty.call(allowed,type)){
+          // Drop potentially dangerous elements and their contents entirely.
+          if(/^(script|style|iframe|object|embed|svg|math|form|input|button|template)$/i.test(type))return;
+          copySafe(node,to);return;
+        }
+        var clean=document.createElement(allowed[type]);
+        if(type==='a'){
+          var url=(node.getAttribute('href')||'').trim();
+          if(/^https?:\/\//i.test(url)||/^mailto:/i.test(url)){
+            clean.href=url;
+            clean.target='_blank';
+            clean.rel='noopener noreferrer';
+          }
+        }
+        // Ignore arbitrary HTML styles, classes and event handlers.
+        copySafe(node,clean);
+        to.append(clean);
+      });
+    }
+    copySafe(doc.body,result);
+    return result;
+  }
   function show(c){
     paint(dLogo,c);
     document.getElementById('d-title').textContent=c.name;
@@ -324,7 +375,7 @@ footer p{max-width:50ch;color:var(--muted)}
     when.textContent=period(c);when.classList.toggle('live',!!c.ongoing);
     body.textContent='';
     [['Overview',c.overview],['Challenges',c.challenges],['Participants',c.participants],['What I Did',c.role]].forEach(function(s){
-      if(s[1]){body.append(el('h3','',s[0]),el('p','txt',s[1]));}
+      if(s[1]){body.append(el('h3','',s[0]),renderCampaignText(s[1]));}
     });
     var gallery=Array.isArray(c.gallery)?c.gallery:(c.gallery?[c.gallery]:[]);
     gallery=gallery.filter(function(src){return typeof src==='string'&&src.trim();});
@@ -339,7 +390,7 @@ footer p{max-width:50ch;color:var(--muted)}
       });
       body.append(photos);
     }
-    if(c.results){body.append(el('h3','','Results'),el('p','txt',c.results));}
+    if(c.results){body.append(el('h3','','Results'),renderCampaignText(c.results));}
     if(!body.children.length){var q=el('p','',"Details for this campaign are coming soon.");q.style.marginTop='22px';body.append(q);}
     dlg.showModal();
   }
