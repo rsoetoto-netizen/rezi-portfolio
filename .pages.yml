@@ -83,6 +83,9 @@ content:
           - name: linkedin
             label: LinkedIn profile URL
             type: string
+          - name: cv_url
+            label: CV Google Drive URL (share link)
+            type: string
 
       - name: meme
         label: Meme next to contact
