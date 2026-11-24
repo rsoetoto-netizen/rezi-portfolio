@@ -196,6 +196,8 @@ footer p{max-width:50ch;color:var(--muted)}
 .contact-meme[hidden]{display:none}
 .contact-meme img{display:block;width:100%;max-width:380px;max-height:320px;object-fit:contain;border-radius:10px}
 .contact-meme figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+/* Balance the meme against the taller Contact column (including the CV link). */
+@media(min-width:721px){.contact-meme{transform:translateY(48px)}}
 @media(max-width:720px){.contact-layout{grid-template-columns:1fr}.avatar {width:132px; height:132px;}}
 @media(max-width:440px){.campaign-gallery{grid-template-columns:1fr}}
 /* Languages beneath Skills & Tools: compact, borderless list */
@@ -522,7 +524,7 @@ nav .nav-experience:hover,nav .nav-experience:focus-visible{background:var(--pil
     }
     // The CV link is editable in Pages CMS; show it only after a valid Drive URL is saved.
     if(contact.cv_url&&/^https:\/\/(?:drive|docs)\.google\.com\//i.test(String(contact.cv_url).trim())){
-      addContact('CV','Download my CV',String(contact.cv_url).trim());
+      addContact('CV','Download My CV',String(contact.cv_url).trim());
     }
     var meme=site.meme||{};
     if(meme.image){var imgpath=safeImagePath(meme.image);if(imgpath){document.getElementById('contact-meme-image').src=imgpath;document.getElementById('contact-meme-caption').textContent=meme.caption||'';document.getElementById('contact-meme').hidden=false;}}
