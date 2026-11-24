@@ -152,6 +152,12 @@ content:
         options:
           format: html
           media: false
+      - name: deliverables
+        label: Deliverables
+        type: rich-text
+        options:
+          format: html
+          media: false
       - name: gallery
         label: Visual campaign (multiple images)
         type: image
