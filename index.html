@@ -418,7 +418,7 @@ nav .nav-experience:hover,nav .nav-experience:focus-visible{background:var(--pil
     tag.textContent=c.industry||'';tag.hidden=!c.industry;
     when.textContent=period(c);when.classList.toggle('live',!!c.ongoing);
     body.textContent='';
-    [['Overview',c.overview],['Challenges',c.challenges],['Participants',c.participants],['What I Did',c.role]].forEach(function(s){
+    [['Overview',c.overview],['Challenges',c.challenges],['Participants',c.participants],['What I Did',c.role],['Deliverables',c.deliverables]].forEach(function(s){
       if(s[1]){body.append(el('h3','',s[0]),renderCampaignText(s[1]));}
     });
     var gallery=Array.isArray(c.gallery)?c.gallery:(c.gallery?[c.gallery]:[]);
