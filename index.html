@@ -25,6 +25,10 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 nav{display:flex;flex-wrap:wrap;gap:22px;padding:16px 0}
 nav a{color:var(--muted);text-decoration:none;font-weight:500}
 nav a:hover{color:var(--ink)}
+/* Subtle navigation hover/focus feedback for links and the popup trigger */
+nav a,nav .nav-experience{display:inline-flex;align-items:center;min-height:38px;padding:6px 10px;border-radius:7px;transition:background-color .18s ease,color .18s ease}
+nav a:hover,nav .nav-experience:hover,nav a:focus-visible,nav .nav-experience:focus-visible{background:var(--pill);color:var(--accent)}
+@media (prefers-reduced-motion:reduce){nav a,nav .nav-experience{transition:none}}
 .intro{display:flex;flex-wrap:wrap;align-items:center;gap:28px;padding:32px 0 52px}
 .avatar{flex:none;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;font:600 2.7rem Newsreader,Georgia,serif}
 .lead{max-width:60ch;margin:12px 0 22px;font-size:1.1rem;color:var(--muted)}
@@ -247,6 +251,8 @@ footer p{max-width:50ch;color:var(--muted)}
 nav .nav-experience{appearance:none;border:0;background:none;padding:0;color:var(--muted);font:inherit;font-weight:500;line-height:inherit;cursor:pointer}
 nav .nav-experience:hover{color:var(--ink)}
 nav .nav-experience:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+nav .nav-experience{padding:6px 10px}
+nav .nav-experience:hover,nav .nav-experience:focus-visible{background:var(--pill);color:var(--accent)}
 .experience-dialog .experience-inner{padding:42px clamp(22px,5vw,56px) 52px}
 .experience-dialog .experience-close{position:sticky;top:10px;float:right;z-index:2;margin:-25px -35px 10px 10px}
 .experience-dialog .experience-icon{display:block;margin:2px 0 24px;font-size:2.4rem;line-height:1;color:#43866a}
@@ -513,6 +519,10 @@ nav .nav-experience:focus-visible{outline:2px solid var(--accent);outline-offset
     }
     if(contact.linkedin&&/^https:\/\/(?:[a-z]{2,3}\.)?linkedin\.com\//i.test(contact.linkedin)){
       addContact('LinkedIn','View my LinkedIn profile',contact.linkedin);
+    }
+    // The CV link is editable in Pages CMS; show it only after a valid Drive URL is saved.
+    if(contact.cv_url&&/^https:\/\/(?:drive|docs)\.google\.com\//i.test(String(contact.cv_url).trim())){
+      addContact('CV','Download My CV',String(contact.cv_url).trim());
     }
     var meme=site.meme||{};
     if(meme.image){var imgpath=safeImagePath(meme.image);if(imgpath){document.getElementById('contact-meme-image').src=imgpath;document.getElementById('contact-meme-caption').textContent=meme.caption||'';document.getElementById('contact-meme').hidden=false;}}
