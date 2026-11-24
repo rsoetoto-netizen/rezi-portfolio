@@ -162,6 +162,42 @@ content:
           format: html
           media: false
 
+  - name: experience
+    label: Work Experience
+    type: file
+    path: experience.json
+    format: json
+    list: true
+    fields:
+      - name: company
+        label: Company name
+        type: string
+        required: true
+      - name: positions
+        label: Positions at this company
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Job title
+            type: string
+            required: true
+          - name: period
+            label: Employment period (e.g. Jan 2021 - Mar 2024)
+            type: string
+          - name: agency
+            label: Agency, client, or affiliation (optional)
+            type: string
+          - name: brands
+            label: Brands handled (optional)
+            type: text
+          - name: description
+            label: Role description (optional)
+            type: rich-text
+            options:
+              format: html
+              media: false
+
   - name: tools
     label: Tools
     type: file
