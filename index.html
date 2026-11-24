@@ -522,7 +522,7 @@ nav .nav-experience:hover,nav .nav-experience:focus-visible{background:var(--pil
     }
     // The CV link is editable in Pages CMS; show it only after a valid Drive URL is saved.
     if(contact.cv_url&&/^https:\/\/(?:drive|docs)\.google\.com\//i.test(String(contact.cv_url).trim())){
-      addContact('CV','Download My CV',String(contact.cv_url).trim());
+      addContact('CV','Download my CV',String(contact.cv_url).trim());
     }
     var meme=site.meme||{};
     if(meme.image){var imgpath=safeImagePath(meme.image);if(imgpath){document.getElementById('contact-meme-image').src=imgpath;document.getElementById('contact-meme-caption').textContent=meme.caption||'';document.getElementById('contact-meme').hidden=false;}}
